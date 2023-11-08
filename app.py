@@ -71,6 +71,10 @@ def get_weather():
 
 
 
+
+@app.route('/')
+def hello():
+    return "Welcome to the Wanderlust Travel Planner API!"
 # Define a route for adding destinations
 @app.route('/destinations', methods=['POST'])
 def create_destination():
