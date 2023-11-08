@@ -4,12 +4,32 @@ import requests
 from dotenv import load_dotenv 
 from flask import Flask, request, jsonify
 from models import Destination, Itinerary, Expense
-
+from flask_swagger_ui import get_swaggerui_blueprint
 # Load environment variables from a .env file
 load_dotenv()
 
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = '/static/swagger.json' 
 app = Flask(__name__)
 url = os.getenv("DBURL")
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    API_URL,
+    config={  # Swagger UI config overrides
+        'app_name': "Test application"
+    },
+    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
+    #    'clientId': "your-client-id",
+    #    'clientSecret': "your-client-secret-if-required",
+    #    'realm': "your-realms",
+    #    'appName': "your-app-name",
+    #    'scopeSeparator': " ",
+    #    'additionalQueryStringParams': {'test': "hello"}
+    # }
+)
+
+app.register_blueprint(swaggerui_blueprint)
+
 
 # Connect to the PostgreSQL database
 connection = psycopg2.connect(url)
@@ -233,8 +253,9 @@ def create_expense():
     return jsonify({'message': 'Expense added successfully', 'id': expense_id}), 201
 
 # Get all expenses for a specific destination (GET `/expenses/<int:destination_id>`)
-@app.route('/expenses/<int:destination_id>', methods=['GET'])
-def get_expenses(destination_id):
+# Get all expenses for a specific destination (GET `/expenses/destination/<int:destination_id>`)
+@app.route('/expenses/destination/<int:destination_id>', methods=['GET'])
+def get_expenses_by_destination(destination_id):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM expenses WHERE destination_id = %s;", (destination_id,))
@@ -246,7 +267,7 @@ def get_expenses(destination_id):
 
 # Get a specific expense (GET `/expenses/<int:expense_id>`)
 @app.route('/expenses/<int:expense_id>', methods=['GET'])
-def get_expense(expense_id):
+def get_expense_by_id(expense_id):
     with connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT * FROM expenses WHERE id = %s;", (expense_id,))
@@ -257,6 +278,7 @@ def get_expense(expense_id):
 
     expense_obj = Expense(expense[0], expense[1], expense[2], expense[3])
     return jsonify(expense_obj.__dict__)
+
 
 # Update a specific expense (PUT `/expenses/<int:expense_id>`)
 @app.route('/expenses/<int:expense_id>', methods=['PUT'])
