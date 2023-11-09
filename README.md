@@ -25,7 +25,11 @@ After running the `app.py` file, you can access the Swagger API documentation by
 Before running the application, make sure to set the following environment variables in a `.env` file in the project root directory:
 
 ```
-DBURL=your_POSTGRES_connection_url
+host = host
+port = port
+user = user
+password = password
+database = database
 ```
 ## Installation
    ```bash
