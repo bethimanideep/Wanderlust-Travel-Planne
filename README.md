@@ -29,7 +29,7 @@ DBURL=your_POSTGRES_connection_url
 ```
 ## Installation
    ```bash
-  git clone https://github.com/yourusername/Wanderlust-Travel-Planne.git
+  git clone https://github.com/bethimanideep/Wanderlust-Travel-Planne.git
   cd Wanderlust-Travel-Planne
   pip install -r requirements.txt
   python app.py
