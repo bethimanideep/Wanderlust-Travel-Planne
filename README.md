@@ -1,13 +1,15 @@
-#  Wanderlust Travel Planner API [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+#  Wanderlust Travel Planner API [ Flask ][![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ## Overview
 
 Wanderlust Travel Planner is a web application for travelers to plan their trips more effectively. It provides features to create, manage, and track travel destinations, itineraries, and expenses for each trip. The application is built using Python and Flask for the backend, PostgreSQL for the database, and provides RESTful API endpoints for various actions.
 
 ### Backend Deploy
-[Live Demo](https://wanderlust-travel-planner-demo.vercel.app/)
+#-[Live Backend](https://travel-api-two.vercel.app/)    
+
+#-[Live Swagger API Documentation](https://travel-api-two.vercel.app/api/docs/)
 
 ### API Documentation
-## Viewing the Swagger API Documentation
+## Viewing the Swagger API Documentation Local
 
 After running the `app.py` file, you can access the Swagger API documentation by following these steps:
 
@@ -18,15 +20,11 @@ After running the `app.py` file, you can access the Swagger API documentation by
 3. Visit the following URL:
 4.  http://127.0.0.1:5000/api/docs/
 
-
-[Swagger API Documentation](https://wanderlust-travel-planner-demo.vercel.app/api-docs/)
-
 ## .env
 
 Before running the application, make sure to set the following environment variables in a `.env` file in the project root directory:
 
 ```
-PORT=8000
 DBURL=your_POSTGRES_connection_url
 ```
 ## Installation
