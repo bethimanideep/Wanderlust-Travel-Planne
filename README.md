@@ -8,6 +8,8 @@ Wanderlust Travel Planner is a web application for travelers to plan their trips
 
 #-[Live Swagger API Documentation](https://wanderlust-travel-planne.vercel.app/api/docs/)
 
+#-[Live Demo](https://drive.google.com/file/d/1lFvaxsf3NMiiHCwFznYmnfszFrr_gIQm/view?usp=drivesdk)    
+
 ### API Documentation
 ## Viewing the Swagger API Documentation Local
 
