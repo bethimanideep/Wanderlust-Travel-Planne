@@ -4,7 +4,7 @@
 Wanderlust Travel Planner is a web application for travelers to plan their trips more effectively. It provides features to create, manage, and track travel destinations, itineraries, and expenses for each trip. The application is built using Python and Flask for the backend, PostgreSQL for the database, and provides RESTful API endpoints for various actions.
 
 ### Backend Deploy
-#-[Live Backend](https://wanderlust-travel-planner-demo.vercel.app/)    
+#-[Live Backend](https://travel-api-two.vercel.app/)    
 
 #-[Live Swagger API Documentation](https://travel-api-two.vercel.app/api/docs/)
 
