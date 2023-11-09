@@ -1,4 +1,4 @@
-#  Wanderlust Travel Planner API [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+#  Wanderlust Travel Planner API [ Flask ][![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 ## Overview
 
 Wanderlust Travel Planner is a web application for travelers to plan their trips more effectively. It provides features to create, manage, and track travel destinations, itineraries, and expenses for each trip. The application is built using Python and Flask for the backend, PostgreSQL for the database, and provides RESTful API endpoints for various actions.
