@@ -11,29 +11,49 @@ load_dotenv()
 SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
 API_URL = '/static/swagger.json' 
 app = Flask(__name__)
-url = os.getenv("DBURL")
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
     API_URL,
     config={  # Swagger UI config overrides
         'app_name': "Test application"
     },
-    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
-    #    'clientId': "your-client-id",
-    #    'clientSecret': "your-client-secret-if-required",
-    #    'realm': "your-realms",
-    #    'appName': "your-app-name",
-    #    'scopeSeparator': " ",
-    #    'additionalQueryStringParams': {'test': "hello"}
-    # }
 )
 
 app.register_blueprint(swaggerui_blueprint)
 
 
-# Connect to the PostgreSQL database
-connection = psycopg2.connect(url)
- 
+host = os.getenv("host")
+port = os.getenv("port")
+user = os.getenv("user")
+password = os.getenv("password")
+database = os.getenv("database")
+
+connection = psycopg2.connect(
+    host=host,
+    port=port,
+    user=user,
+    password=password,
+    database=database
+)
+
+
+CREATE_DESTINATIONS_TABLE = (
+        "CREATE TABLE IF NOT EXISTS destinations (id SERIAL PRIMARY KEY, name TEXT, description TEXT, location TEXT);"
+    )
+
+CREATE_ITINERARIES_TABLE = (
+        "CREATE TABLE IF NOT EXISTS itineraries (id SERIAL PRIMARY KEY, destination_id INT, activity TEXT);"
+    )
+
+CREATE_EXPENSES_TABLE = (
+        "CREATE TABLE IF NOT EXISTS expenses (id SERIAL PRIMARY KEY, destination_id INT, expense_category TEXT, amount FLOAT);"
+    )
+
+with connection:
+    with connection.cursor() as cursor:
+        cursor.execute(CREATE_DESTINATIONS_TABLE)
+        cursor.execute(CREATE_ITINERARIES_TABLE)
+        cursor.execute(CREATE_EXPENSES_TABLE)
 
 # Define the route to get weather data
 @app.route('/weather', methods=['GET'])
